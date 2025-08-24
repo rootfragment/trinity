@@ -26,3 +26,18 @@ This shows how kernel modules can query and log information about processes inte
 
 ---
 
+## Usage
+
+```bash
+# Make
+make
+
+# Insert the module
+sudo insmod hello.ko
+
+# Remove the module
+sudo rmmod hello
+
+# View kernel log messages
+dmesg | tail
+
