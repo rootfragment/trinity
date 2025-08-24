@@ -59,3 +59,5 @@ sudo rmmod 05-advanced_log
 # View kernel log messages
 dmesg | tail
 
+# View /proc file
+cat /proc/kernel_list
