@@ -25,6 +25,15 @@ This is typically the first step in learning kernel programming, showing how mod
 Kernel headers matching the currently running kernel are required to compile modules.  
 On most distributions, they can be installed using:
 
+```bash
+# For Debian/Ubuntu
+sudo apt-get update
+sudo apt-get install build-essential linux-headers-$(uname -r)
+
+# For Fedora/RHEL/CentOS
+sudo dnf install make gcc kernel-devel kernel-headers
+```
+
 ## Usage
 
 ```bash
