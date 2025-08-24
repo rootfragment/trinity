@@ -19,6 +19,30 @@ This is typically the first step in learning kernel programming, showing how mod
 
 ---
 
+## Explanation of Each Part
+
+### `obj-m := 01-hello_world.o`
+- Tells the kernel build system to build a loadable module (`.ko`) from the source file `01-hello_world.c`.  
+- `01-hello_world.o` is an intermediate object file that will eventually become `01-hello_world.ko`.  
+
+---
+
+### `all:`
+- Defines the **default build target**.  
+- **`make -C /lib/modules/$(shell uname -r)/build`** → switches into the kernel build directory for the currently running kernel.  
+- **`M=$(PWD)`** → tells the kernel build system to also build the module sources located in the current working directory.  
+- **`modules`** → instructs the kernel build system to build all modules listed in `obj-m`.  
+
+---
+
+### `clean:`
+- Removes all temporary files generated during compilation, such as:  
+  - `01-hello_world.o` (object file)  
+  - `01-hello_world.ko` (kernel object, if already built)  
+  - `Module.symvers`, `modules.order`, and other build artifacts.  
+- Ensures you can rebuild from scratch without leftover files.  
+
+
 ## Build Instructions
 
 ### 1. Install Kernel Headers
