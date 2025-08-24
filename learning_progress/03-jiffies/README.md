@@ -42,4 +42,7 @@ sudo rmmod 04-jiffies
 # View kernel log messages
 dmesg | tail
 
-
+```
+---
+## Note
+- Remove the module after some time to calculate the time the module was loaded.
