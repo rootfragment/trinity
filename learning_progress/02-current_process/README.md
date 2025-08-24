@@ -33,10 +33,10 @@ This shows how kernel modules can query and log information about processes inte
 make
 
 # Insert the module
-sudo insmod hello.ko
+sudo insmod 02-current_process.ko
 
 # Remove the module
-sudo rmmod hello
+sudo rmmod 02-current_process
 
 # View kernel log messages
 dmesg | tail
