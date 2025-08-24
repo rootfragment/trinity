@@ -39,6 +39,7 @@ sudo dnf install make gcc kernel-devel kernel-headers
 ```bash
 # Make
 make
+
 # Insert the module
 sudo insmod hello.ko
 
