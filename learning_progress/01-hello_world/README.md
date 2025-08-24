@@ -20,7 +20,21 @@ This is typically the first step in learning kernel programming, showing how mod
 ---
 
 ## Build Instructions
-Run the following command inside the module’s directory:
+
+### 1. Install Kernel Headers
+Kernel headers matching the currently running kernel are required to compile modules.  
+On most distributions, they can be installed using:
+
+## Usage
 
 ```bash
+# Make
 make
+# Insert the module
+sudo insmod hello.ko
+
+# Remove the module
+sudo rmmod hello
+
+# View kernel log messages
+dmesg | tail
