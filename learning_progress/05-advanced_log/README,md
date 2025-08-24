@@ -41,5 +41,3 @@ Defines how the `/proc` file behaves:
 ### 5. Module Cleanup (`log_exit`)
 - Removes the `/proc/kernel_list` entry using **`proc_remove`**.  
 - Prints a log message when the module is unloaded.  
-
----
