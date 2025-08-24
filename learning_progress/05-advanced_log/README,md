@@ -43,19 +43,3 @@ Defines how the `/proc` file behaves:
 - Prints a log message when the module is unloaded.  
 
 ---
-
-## Usage
-
-```bash
-
-# Make
-make
-
-# Insert the module
-sudo insmod 05-advanced_log.ko
-
-# Remove the module
-sudo rmmod 05-advanced_log
-
-# View kernel log messages
-dmesg
