@@ -19,7 +19,7 @@ This is typically the first step in learning kernel programming, showing how mod
 
 ---
 
-## Explanation of Each Part
+## Explanation of Makefile
 
 ### `obj-m := 01-hello_world.o`
 - Tells the kernel build system to build a loadable module (`.ko`) from the source file `01-hello_world.c`.  
