@@ -65,10 +65,10 @@ sudo dnf install make gcc kernel-devel kernel-headers
 make
 
 # Insert the module
-sudo insmod hello.ko
+sudo insmod 01-hello_world.ko
 
 # Remove the module
-sudo rmmod hello
+sudo rmmod 01-hello_world
 
 # View kernel log messages
 dmesg | tail
