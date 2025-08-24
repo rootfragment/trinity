@@ -1,4 +1,4 @@
-Trinity - Learning progress
+### Trinity - Learning progress
 
 This repository aims to showcase all the programs created on the path of building a rootkit detection framework for linux.
 The goal is to explore the different ways in which rootkits hide itself in the linux system and to develop ways to expose and counter such programs.
