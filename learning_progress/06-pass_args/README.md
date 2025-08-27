@@ -3,9 +3,7 @@
 This Linux kernel module demonstrates how to **pass arguments** to a module at load time using `insmod`.  
 It also exposes these arguments through **sysfs**, so they can be viewed and changed at runtime.
 The letter parameter does not accept direct characters (e.g., letter='b' will not work).
-You must always provide the ASCII value instead. `letter` is declared as byte, so you must pass its ASCII code,
- -A -> 65
- -B -> 66
+You must always provide the ASCII value instead. `letter` is declared as byte, so you must pass its ASCII code.
 
 ---
 
