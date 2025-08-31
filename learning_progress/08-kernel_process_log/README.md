@@ -5,7 +5,7 @@ It provides both per-thread details and a total count of kernel threads at the t
 
 ---
 
-## 📌 Features
+## Features
 - Creates a `/proc` file: **`/proc/kernel_threads`**
 - When read, it displays:
   - **PID**: Process ID of the kernel thread
@@ -17,7 +17,7 @@ It provides both per-thread details and a total count of kernel threads at the t
 
 ---
 
-## ⚙️ How It Works
+## ⚙ How It Works
 1. **Process Iteration**  
    - The module iterates over all tasks using the `for_each_process` macro.
    - Each task has a `task_struct` containing metadata such as `pid`, `comm`, and `flags`.
