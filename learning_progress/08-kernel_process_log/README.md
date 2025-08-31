@@ -64,7 +64,7 @@ make
 
 ### 2. Insert the Module
 
-sudo insmod kernel_threads.ko
+sudo insmod 08-kernel_process_log.ko
 
 
 ### 3. Check Kernel Logs
@@ -79,7 +79,7 @@ cat /proc/kernel_threads
 
 ### 5. Remove the Module
 
-sudo rmmod kernel_threads
+sudo rmmod 08-kernel_process_log
 ```
 
 
