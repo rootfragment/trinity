@@ -2,7 +2,7 @@
 
 This kernel module demonstrates how to use **kprobes** to trace the
 `mkdir` system call on x86_64 Linux.
-
+---
 ## Working
 
 -   Attaches a probe to the `__x64_sys_mkdir` symbol (the system call
@@ -13,11 +13,12 @@ This kernel module demonstrates how to use **kprobes** to trace the
 -   Safely copies the filename from user space into the kernel buffer.
 -   Prints details whenever a process calls `mkdir`:
 
-```{=html}
-<!-- -->
+
 ```
     [mkdir-probe] pid=1234 comm=myprocess path=/tmp/newdir mode=0755
 
+```
+---
 ## Code Breakdown
 
 -   **handler_pre()**: Runs before the probed function executes.
@@ -34,43 +35,15 @@ This kernel module demonstrates how to use **kprobes** to trace the
 -   **probe_entry() / probe_exit()**: Registers and unregisters the
     probe.
 
-## Building
-
-Make sure you have kernel headers installed. Save the code in
-`mkdir_probe.c` and use a `Makefile` like:
-
-``` makefile
-obj-m += mkdir_probe.o
-
-all:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
-
-clean:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-```
-
-Then build and load:
-
-``` bash
-make
-sudo insmod mkdir_probe.ko
-dmesg -w
-```
-
-Unload when done:
-
-``` bash
-sudo rmmod mkdir_probe
-```
-
+---
 ## Notes on Registers
 
 On x86_64 Linux syscall ABI:\
 - 1st arg → `rdi` (`regs->di` in kernel) - 2nd arg → `rsi`
 (`regs->si`) - This is why we fetch `filename` from `regs->di` and
 `mode` from `regs->si`.
-
-## Warning ⚠
+---
+## Warning 
 
 This example attaches to the symbol `__x64_sys_mkdir`.\
 On some modern kernels, this symbol may:\
@@ -81,3 +54,5 @@ Additionally, the filename pointer comes from **user space**. If it
 points to invalid memory, the kernel may return `<FAULT>`.\
 Always be careful when copying data from user space in kernel modules.
 
+
+---
