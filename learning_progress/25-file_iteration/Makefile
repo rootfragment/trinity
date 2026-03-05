@@ -1,4 +1,4 @@
-obj-m += file_itr.o
+obj-m += 25-file_iteration.o
 
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD  := $(shell pwd)
