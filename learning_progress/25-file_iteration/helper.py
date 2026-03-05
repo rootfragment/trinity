@@ -3,10 +3,6 @@ import stat
 
 PROC = "/proc/argus_fs"
 
-
-# ----------------------------
-# Userspace view (via syscalls)
-# ----------------------------
 def get_user_view(directory):
     view = {}
 
@@ -28,9 +24,7 @@ def get_user_view(directory):
             continue
 
     return view
-# ----------------------------
-# Kernel view (via /proc)
-# ----------------------------
+
 def get_kernel_view(directory):
     # Send directory to kernel
     with open(PROC, "w") as f:
@@ -83,9 +77,6 @@ def get_kernel_view(directory):
     return view
 
 
-# ----------------------------
-# Comparison Engine
-# ----------------------------
 def compare(user_view, kernel_view):
     hidden = False
     phantom = False
@@ -114,12 +105,9 @@ def compare(user_view, kernel_view):
                 mismatch = True
 
     if not hidden and not phantom and not mismatch:
-        print("✔ No mismatches detected.")
+        print("[+] No mismatches detected.")
 
 
-# ----------------------------
-# Main
-# ----------------------------
 if __name__ == "__main__":
 
     directory = input("Enter directory to scan: ").strip()
