@@ -7,6 +7,7 @@ This is the userspace command-line interface (CLI) for the Argus Linux Rootkit D
 - **Interactive Menu:** Provides a simple, menu-driven interface to run different security scans.
 - **Continuous Background Monitoring:** In interactive mode, a background thread monitors syscall integrity every 3 seconds, providing immediate visual alerts if tampering is detected.
 - **Syscall Integrity Scanning:** Detects unauthorized modifications to the kernel's system call table by comparing live addresses against known-good values, identifying the exact syscalls hooked and the malicious function addresses.
+- **Filesystem Integrity Scanning:** Identifies hidden or "phantom" files and metadata mismatches by comparing the userspace directory listing with the kernel's internal view (`/proc/rk_fs`).
 - **Process Scan:** Compares the process list from the Argus kernel module (`/proc/rk_ps`) with the output of the standard `ps` command to detect hidden processes.
 - **Module Scan:** Compares the kernel module list from `/proc/rk_mods` with the list from `/proc/modules` to detect hidden LKMs.
 - **Port Scan:** Compares the list of listening network ports from `/proc/rk_sockets` with the output of the `ss` command to find hidden backdoors.
@@ -20,6 +21,15 @@ This is the userspace command-line interface (CLI) for the Argus Linux Rootkit D
 The client operates on a simple principle: **trust the kernel**. It reads the "ground truth" data from the `/proc/rk_*` files created by the Argus kernel module. It then gathers the equivalent data from standard userspace utilities (`ps`, `ss`, etc.). By finding the difference between these two sets, it can pinpoint resources that are being actively hidden from the userspace, a common technique used by rootkits.
 
 For example, if a process PID appears in `/proc/rk_ps` but not in the output of `ps -e`, it is flagged as a "Hidden Process."
+
+### Filesystem Scan
+
+The Filesystem Scan uses a configurable list of directories (defined in `dir_list.txt`) to check for inconsistencies:
+- **Hidden Files:** Files present in the kernel's view but missing from userspace (standard `ls` or `scandir`).
+- **Phantom Files:** Files visible in userspace but not recognized by the kernel.
+- **Metadata Mismatches:** Files where attributes like size, permissions (mode), owner (UID), or group (GID) differ between the kernel and userspace views.
+
+The tool writes the target directory to `/proc/rk_fs` and reads back the kernel's metadata for every file in that path for comparison.
 
 ### Syscall Tamper Detection
 
@@ -57,12 +67,17 @@ The "Full Scan" feature doesn't just list anomalies; it analyzes the combination
     - `[3]` Compare Network Ports (Kernel vs /bin/ss)
     - `[4]` Perform Syscall Integrity Scan
     - `[5]` Perform Full Scan (All checks)
-    - `[6]` Toggle UDP alerts ON/OFF for the current session.
+    - `[6]` Perform Filesystem Scan
+    - `[7]` Toggle UDP alerts ON/OFF for the current session.
     - `[99]` Exit
 
 ## Configuration
 
 The script uses a `config.json` file for configuration. If this file is not found, a default one will be created automatically.
+
+### Target Directories (`dir_list.txt`)
+
+For the Filesystem Scan, Argus reads a list of directories from `dir_list.txt`. If the file doesn't exist, a template is created with common system paths (`/bin`, `/usr/bin`, `/sbin`). You can add any directory you wish to monitor, one per line.
 
 ### UDP Alerts
 
