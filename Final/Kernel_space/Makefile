@@ -2,7 +2,7 @@
 obj-m += argus_lkm.o
 
 
-argus_lkm-objs := core.o process.o modules.o socket.o syscall.o
+argus_lkm-objs := core.o process.o modules.o socket.o syscall.o fs.o
 
 
 all:
