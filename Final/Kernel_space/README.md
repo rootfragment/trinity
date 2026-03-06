@@ -20,6 +20,7 @@ When loaded, the Argus LKM (`argus_lkm.ko`) creates a set of read-only files in 
 - **/proc/rk_mods**: Provides a list of all loaded kernel modules.
 - **/proc/rk_sockets**: Provides a list of all active network sockets, including the process holding them and the port number.
 - **/proc/rk_syscalls**: Compares the live system call table against a trusted "golden" copy. Returns `0` if no changes are detected, or `-1` followed by a list of tampered syscalls and their new addresses.
+- **/proc/rk_fs**: Allows for directory enumeration from the kernel's perspective. By writing a path to this file and then reading from it, users can see the actual files in a directory, bypassing some user-level hiding techniques.
 
 ### Detection Mechanism (e.g., Diamorphine)
 
@@ -37,6 +38,7 @@ The `syscall` component works by establishing a baseline of trust immediately up
 - **`modules.c` / `modules.h`**: Contains the logic for traversing the kernel's list of loaded modules and exposing it through `/proc/rk_mods`.
 - **`socket.c` / `socket.h`**: Contains the logic for iterating through open file descriptors to find network sockets and exposing them through `/proc/rk_sockets`.
 - **`syscall.c` / `syscall.h`**: Implements the syscall table integrity check by comparing the live table against the captured golden copy.
+- **`fs.c` / `fs.h`**: Implements the filesystem iteration logic, allowing the kernel to list files in a specified directory.
 - **`Makefile`**: The build script to compile the source code into a loadable kernel module (`.ko` file).
 
 ## Building and Usage
