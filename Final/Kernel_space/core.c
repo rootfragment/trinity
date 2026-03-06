@@ -10,6 +10,7 @@
 #include "modules.h"
 #include "socket.h"
 #include "syscall.h"
+#include "fs.h"
 
 MODULE_LICENSE("GPL");
 
@@ -20,6 +21,7 @@ static struct proc_dir_entry *proc_ps;
 static struct proc_dir_entry *proc_mods;
 static struct proc_dir_entry *proc_sockets;
 static struct proc_dir_entry *proc_syscalls;
+static struct proc_dir_entry *proc_fs;
 
 static unsigned long (*kallsyms_lookup_name_ptr)(const char *name);
 
@@ -120,6 +122,25 @@ static const struct proc_ops syscalls_fops = {
 	.proc_release = single_release,
 };
 
+static int show_fs(struct seq_file *m, void *v)
+{
+	fs_list(m);
+	return 0;
+}
+
+static int open_fs(struct inode *inode, struct file *file)
+{
+	return single_open(file, show_fs, NULL);
+}
+
+static const struct proc_ops fs_fops = {
+	.proc_open = open_fs,
+	.proc_read = seq_read,
+	.proc_lseek = seq_lseek,
+	.proc_release = single_release,
+	.proc_write = fs_write,
+};
+
 static void cleanup_proc_entries(void)
 {
 	if (proc_ps)
@@ -130,6 +151,8 @@ static void cleanup_proc_entries(void)
 		proc_remove(proc_sockets);
 	if (proc_syscalls)
 		proc_remove(proc_syscalls);
+	if (proc_fs)
+		proc_remove(proc_fs);
 }
 
 static int __init rk_init(void)
@@ -180,6 +203,14 @@ static int __init rk_init(void)
 	proc_syscalls = proc_create("rk_syscalls", 0444, NULL, &syscalls_fops);
 	if(!proc_syscalls) {
 		pr_err("Failed to create /proc/rk_syscalls\n");
+		cleanup_proc_entries();
+		kfree(golden_sys_call_table);
+		return -ENOMEM;
+	}
+
+	proc_fs = proc_create("rk_fs", 0666, NULL, &fs_fops);
+	if (!proc_fs) {
+		pr_err("Failed to create /proc/rk_fs\n");
 		cleanup_proc_entries();
 		kfree(golden_sys_call_table);
 		return -ENOMEM;
