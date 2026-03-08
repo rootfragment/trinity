@@ -1,4 +1,4 @@
-obj-m := 26-hash_basic.o
+obj-m := 26-basic_hash.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD)
