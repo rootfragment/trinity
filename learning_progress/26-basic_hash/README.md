@@ -81,6 +81,3 @@ dmesg | tail -n 1
 *   **Kernel Space Caution**: This code runs with full system privileges. Errors can lead to kernel panics or system instability.
 *   **Memory Management**: Always ensure `kmalloc` results are checked and that `crypto_free_shash` is called to avoid resource exhaustion.
 *   **GPL Compliance**: The module is licensed under GPL to ensure compatibility with kernel symbols exported as `EXPORT_SYMBOL_GPL`.
-
-## License
-GPL
