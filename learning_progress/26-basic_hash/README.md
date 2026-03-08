@@ -74,7 +74,7 @@ sudo rmmod hash_basic
 Check `dmesg` again to see the exit message:
 ```bash
 dmesg | tail -n 1
-# Output: Unloading this bad boi
+# Output: Unloading hash module
 ```
 
 ## Safety and Best Practices
