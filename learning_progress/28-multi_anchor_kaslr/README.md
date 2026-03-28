@@ -63,7 +63,7 @@ make
 ### Load
 Insert the module into the kernel:
 ```bash
-sudo insmod 27-kaslr_offset.ko
+sudo insmod 28-kaslr_adv.ko
 ```
 
 ### Verify Results
@@ -82,7 +82,7 @@ KASLR Finder: Verified! KASLR Offset is consistently 0x19000000
 ### Unload
 Remove the module:
 ```bash
-sudo rmmod 27_kaslr_offset
+sudo rmmod 28-kaslr_adv
 ```
 
 ---
