@@ -21,8 +21,7 @@ The core enhancement in this version is the use of **three independent syscall a
 
 #### Choice of Syscalls
 The syscalls `getpid`, `getuid`, and `getgid` were chosen for several strategic reasons:
--   **Simplicity and Stability**: These are "leaf" syscalls that perform very basic tasks. They are historically stable and present in virtually every Linux kernel version.
--   **Common Hooking Targets**: While simple, they are frequent targets for basic rootkits (e.g., hiding a PID or elevating a UID). This makes them excellent "canaries" for detecting common hooking techniques.
+-   **Simplicity and Stability**: These are low yeild systemcalls, that is a rootkit cant do much with it even if it does hooks these systemcalls and hence are usually left alone.
 -   **System Map Availability**: These symbols are consistently exported and easy to locate in `System.map`, ensuring the `Makefile` can reliably extract their static addresses across different distributions.
 
 ---
