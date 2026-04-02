@@ -4,20 +4,6 @@ A Linux kernel module that computes and exposes the **KASLR (Kernel Address Spac
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)
-- [How It Works](#how-it-works)
-- [Security Model](#security-model)
-- [Requirements](#requirements)
-- [Building](#building)
-- [Usage](#usage)
-- [Output Reference](#output-reference)
-- [Internals](#internals)
-- [Caveats](#caveats)
-- [License](#license)
-
----
 
 ## Overview
 
