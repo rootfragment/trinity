@@ -208,7 +208,7 @@ static int __init rk_init(void)
 		return -ENOMEM;
 	}
 
-	proc_fs = proc_create("rk_fs", 0666, NULL, &fs_fops);
+	proc_fs = proc_create("rk_fs", 0600, NULL, &fs_fops);
 	if (!proc_fs) {
 		pr_err("Failed to create /proc/rk_fs\n");
 		cleanup_proc_entries();
