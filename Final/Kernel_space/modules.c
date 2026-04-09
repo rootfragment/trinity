@@ -3,7 +3,7 @@
 #include <linux/seq_file.h>
 #include "modules.h"
 
-#define MAX_MODULES_GUARD 1024 
+
 void module_list(struct seq_file *m)
 {
 	struct module *mod;
