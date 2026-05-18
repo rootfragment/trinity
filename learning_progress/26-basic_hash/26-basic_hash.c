@@ -2,7 +2,6 @@
 #include<linux/module.h>
 #include<linux/init.h>
 #include<linux/crypto.h>
-#include<linux/scatterlist.h>
 #include<crypto/hash.h>
 
 static int __init hash_basic_entry(void)
